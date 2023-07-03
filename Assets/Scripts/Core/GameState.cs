@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.XR.ARFoundation;
  
-[RequireComponent(typeof(ARPlaneManager))]
+
 public class GameState : MonoBehaviour
 {
     public enum EGameState { Pregame, Loading, Intro, Game, Outro, Postgame }
@@ -12,15 +11,6 @@ public class GameState : MonoBehaviour
     
     protected StateMachine<EGameState> StateMachine = new();
     
-    private ARPlaneManager _arPlaneManager;
-
-    [SerializeField] private GameObject prefab;
-
-    private void Awake()
-    {
-	    _arPlaneManager = GetComponent<ARPlaneManager>();  
-    }
-
 	// private IEnumerator GoBackToMainMenu()
 	// {
 	// 	Task task = GameManager.Instance.Runner.Shutdown();
@@ -36,14 +26,16 @@ public class GameState : MonoBehaviour
 
 	private void Start()
 	{
+		Debug.Log("GameStateStarted");
 		StateMachine[EGameState.Pregame].onEnter = prev =>
 		{
 			Debug.Log("Pregame");
-			if (prev == EGameState.Postgame)
-			{
-				//Menu?
-			}
-			_arPlaneManager.planesChanged += SpawnNumber;
+			
+		};
+		
+		StateMachine[EGameState.Pregame].onUpdate = () =>
+		{
+			
 		};
 
 		StateMachine[EGameState.Pregame].onExit = next =>
@@ -53,6 +45,7 @@ public class GameState : MonoBehaviour
 
 		StateMachine[EGameState.Loading].onEnter = prev =>
 		{
+			Debug.Log("Loading");
 			
 		};
 
@@ -73,7 +66,8 @@ public class GameState : MonoBehaviour
 
 		StateMachine[EGameState.Game].onEnter = prev =>
 		{
-			
+			Debug.Log("Game");
+			GameManager.Instance.arPlaneManager.planesChanged += GameManager.Instance.SpawnNumber;
 		};
 
 		StateMachine[EGameState.Game].onUpdate = () =>
@@ -105,21 +99,6 @@ public class GameState : MonoBehaviour
 		{
 			
 		};
-	}
-	
-	private void SpawnNumber(ARPlanesChangedEventArgs plane)
-	{
-		foreach (var p in plane.added)
-		{
-			Debug.Log("plane" + p);
-			GameObject obj = Instantiate(prefab, p.transform.position, p.transform.rotation);
-			Debug.Log("obj" + obj);
-			if (obj != null)
-			{
-				_arPlaneManager.planesChanged -= SpawnNumber;
-				break;
-			}
-		}
 	}
 	
 	private void FixedUpdate()

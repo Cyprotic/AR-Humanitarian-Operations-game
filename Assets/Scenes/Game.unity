@@ -513,7 +513,6 @@ GameObject:
   - component: {fileID: 1659859599}
   - component: {fileID: 1659859604}
   - component: {fileID: 1659859603}
-  - component: {fileID: 1659859602}
   - component: {fileID: 1659859601}
   - component: {fileID: 1659859600}
   m_Layer: 0
@@ -552,6 +551,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameState: {fileID: 1659859601}
+  NumbersList:
+  - {fileID: 5800684864648713555, guid: 86d83bcbb97e3df4c9222a5ba110ab81, type: 3}
+  - {fileID: 3848310160658334159, guid: 3bbc7082119d74143922f3a11c976b78, type: 3}
+  - {fileID: 8068063727793322752, guid: 005c930a8b6eed44795b8bb9a0199192, type: 3}
+  - {fileID: 6378599997269898618, guid: 336ce065531f0f84e8f97c66a140808c, type: 3}
+  - {fileID: 2445062561408548203, guid: ccffd272f90bf92479fe4759f4eed6f9, type: 3}
+  - {fileID: 1397696161874677421, guid: 12ba522ea5a63d94bb772e26d69dba0c, type: 3}
+  - {fileID: 5661012195689232747, guid: 42c704f35b530984e974c839de3e8cf0, type: 3}
+  - {fileID: 1099231572036270555, guid: c699335604d51a24db963d2825b783f5, type: 3}
+  - {fileID: 5143437857497317064, guid: 44894b3e6ff69d546a0e83b2a763533a, type: 3}
+  - {fileID: 3924912149272280401, guid: e35ac5d66b6654c45b7dc29b3c2ddcfa, type: 3}
+  arPlaneManager: {fileID: 1659859603}
 --- !u!114 &1659859601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,20 +575,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e1a7e96598b3d44a6d808bd20d12bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
---- !u!114 &1659859602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659859597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RaycastPrefab: {fileID: 0}
 --- !u!114 &1659859603
 MonoBehaviour:
   m_ObjectHideFlags: 0
