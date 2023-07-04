@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameState : MonoBehaviour
 {
-    public enum EGameState { Pregame, Loading, Intro, Game, Outro, Postgame }
+    public enum EGameState { Pregame, Loading, Intro, Game, Choice, Postgame, GameOver }
 
     public EGameState Previous { get; set; }
     public EGameState Current { get; set; }
@@ -68,34 +68,60 @@ public class GameState : MonoBehaviour
 		{
 			Debug.Log("Game");
 			GameManager.Instance.arPlaneManager.planesChanged += GameManager.Instance.SpawnNumber;
+			
+			// Voice over
+			
 		};
 
 		StateMachine[EGameState.Game].onUpdate = () =>
 		{
-			
+			if(GameManager.Instance.instantiatedNumber != null)
+			{
+				SetState(EGameState.Choice);
+			}
 		};
 
-		StateMachine[EGameState.Outro].onEnter = prev =>
+		StateMachine[EGameState.Choice].onEnter = prev =>
 		{
-			
+			GameManager.Instance.optionsSetup.gameObject.SetActive(true);
 		};
 
-		StateMachine[EGameState.Outro].onExit = next =>
+		StateMachine[EGameState.Choice].onExit = next =>
 		{
-			
+			Destroy(GameManager.Instance.instantiatedNumber);
+			GameManager.Instance.optionsSetup.gameObject.SetActive(false);
 		}; 
 
         StateMachine[EGameState.Postgame].onEnter = prev =>
         {
-           
+	        if (GameManager.Instance.NumbersList.Count == 0)
+		        SetState(EGameState.GameOver);
+			GameManager.Instance.SpawnNumber();
         };
 
 		StateMachine[EGameState.Postgame].onUpdate = () =>
 		{
-			
+			if(GameManager.Instance.instantiatedNumber != null)
+			{
+				SetState(EGameState.Choice);
+			}
 		};
 
 		StateMachine[EGameState.Postgame].onExit = next =>
+		{
+			
+		};
+		StateMachine[EGameState.GameOver].onEnter = prev =>
+		{
+			Debug.Log("GAME IS DONE");
+		};
+
+		StateMachine[EGameState.GameOver].onUpdate = () =>
+		{
+			
+		};
+
+		StateMachine[EGameState.GameOver].onExit = next =>
 		{
 			
 		};
